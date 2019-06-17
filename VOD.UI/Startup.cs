@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VOD.Common.Entities;
 using VOD.Database.Contexts;
+using VOD.Database.Migrations;
 
 namespace VOD.UI
 {
@@ -44,7 +45,7 @@ namespace VOD.UI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, VODContext db)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +62,12 @@ namespace VOD.UI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            // Uncomment to recreate the database. ALL DATA WILL BE LOST !
+            //DbInitializer.RecreateDatabase(db);
+
+            //Uncomment to seed the database
+            //DbInitializer.Initialize(db);
 
             app.UseAuthentication();
 
