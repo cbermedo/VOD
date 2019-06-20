@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using VOD.UI.Models;
 using Microsoft.AspNetCore.Identity;
 using VOD.Common.Entities;
+using VOD.Database.Services;
 
 namespace VOD.UI.Controllers
 {
@@ -17,10 +18,32 @@ namespace VOD.UI.Controllers
 
         //DI Login 
         private SignInManager<VODUser> _signInManager;
-        public HomeController(SignInManager<VODUser> signInMgr)
+
+        //inyecto interfaz IDbReadService para recibir una instancia de DbReadService
+        //cuando el usuario necesite una de estas vistas, se hace para modo de prueba, 
+        //probando la funcionalidad en index async action
+        //private IDbReadService _db;
+
+        public HomeController(SignInManager<VODUser> signInMgr, IDbReadService db)
         {
             _signInManager = signInMgr;
-        }
+            //_db = db;
+        }
+
+        //public async Task<IActionResult> Index()
+        //{
+        //    //_db.Include<Download>();
+        //    //_db.Include<Module, Course>();
+
+        //    //// Get Single
+        //    //var result1 = await _db.SingleAsync<Download>(d => d.Id.Equals(3));
+        //    //// Fetch all
+        //    //var result2 = await _db.GetAsync<Download>(); 
+        //    //// Fetch all that matches the Lambda expression
+        //    //var result3 = await _db.GetAsync<Download>(d => d.ModuleId.Equals(1));
+        //    //// True if a record is found
+        //    //var result4 = await _db.AnyAsync<Download>(d => d.ModuleId.Equals(1)); 
+        //}
 
         public IActionResult Index()
         {
