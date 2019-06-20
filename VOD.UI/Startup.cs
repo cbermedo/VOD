@@ -45,6 +45,7 @@ namespace VOD.UI
 
             //Registrando los servicios de VOD.Database 
             services.AddScoped<IDbReadService, DbReadService>();
+            services.AddScoped<IUIReadService, UIReadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

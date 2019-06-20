@@ -23,8 +23,11 @@ namespace VOD.UI.Controllers
         //cuando el usuario necesite una de estas vistas, se hace para modo de prueba, 
         //probando la funcionalidad en index async action
         //private IDbReadService _db;
+        //private IUIReadService _db;
 
-        public HomeController(SignInManager<VODUser> signInMgr, IDbReadService db)
+        //public HomeController(SignInManager<VODUser> signInMgr, IDbReadService db)
+        //public HomeController(SignInManager<VODUser> signInMgr, IUIReadService db)
+        public HomeController(SignInManager<VODUser> signInMgr)
         {
             _signInManager = signInMgr;
             //_db = db;
@@ -43,6 +46,10 @@ namespace VOD.UI.Controllers
         //    //var result3 = await _db.GetAsync<Download>(d => d.ModuleId.Equals(1));
         //    //// True if a record is found
         //    //var result4 = await _db.AnyAsync<Download>(d => d.ModuleId.Equals(1)); 
+        //}
+
+        //public async Task<IActionResult> Index() {
+        //    var courses = (await _db.GetCourses("6cf38e83-ee7c-4184-b416-9d1888a6e8f1")).ToList();        //    var course = (await _db.GetCourse("6cf38e83-ee7c-4184-b416-9d1888a6e8f1", 1));        //    var video = await _db.GetVideo("6cf38e83-ee7c-4184-b416-9d1888a6e8f1", 1);        //    var videos = (await _db.GetVideos("6cf38e83-ee7c-4184-b416-9d1888a6e8f1", 1)).ToList();        //    return Ok();
         //}
 
         public IActionResult Index()
