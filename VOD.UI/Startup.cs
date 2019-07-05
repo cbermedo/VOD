@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using VOD.Common.Entities;
 using VOD.Database.Contexts;
 using VOD.Database.Migrations;using VOD.Database.Services;
+using VOD.Common.DTOModels.UI;
 
 namespace VOD.UI
 {
@@ -46,6 +47,46 @@ namespace VOD.UI
             //Registrando los servicios de VOD.Database 
             services.AddScoped<IDbReadService, DbReadService>();
             services.AddScoped<IUIReadService, UIReadService>();
+
+
+            //Configuracion Automapper
+            var config = new AutoMapper.MapperConfiguration(cfg => {
+                cfg.CreateMap<Video, VideoDTO>();
+                //configuro destino y source de manera manual para los campos
+                cfg.CreateMap<Instructor, InstructorDTO>()
+                    .ForMember(dest => dest.InstructorName,
+                        src => src.MapFrom(s => s.Name))
+                    .ForMember(dest => dest.InstructorDescription,
+                        src => src.MapFrom(s => s.Description))
+                    .ForMember(dest => dest.InstructorAvatar,
+                        src => src.MapFrom(s => s.Thumbnail));
+
+                cfg.CreateMap<Download, DownloadDTO>()
+                    .ForMember(dest => dest.DownloadUrl,
+                        src => src.MapFrom(s => s.Url))
+                    .ForMember(dest => dest.DownloadTitle,
+                        src => src.MapFrom(s => s.Title));
+
+                cfg.CreateMap<Course, CourseDTO>()
+                    .ForMember(dest => dest.CourseId, src =>
+                        src.MapFrom(s => s.Id))
+                    .ForMember(dest => dest.CourseTitle,
+                        src => src.MapFrom(s => s.Title))
+                    .ForMember(dest => dest.CourseDescription,
+                        src => src.MapFrom(s => s.Description))
+                    .ForMember(dest => dest.MarqueeImageUrl,
+                        src => src.MapFrom(s => s.MarqueeImageUrl))
+                    .ForMember(dest => dest.CourseImageUrl,
+                        src => src.MapFrom(s => s.ImageUrl));
+
+                cfg.CreateMap<Module, ModuleDTO>()
+                    .ForMember(dest => dest.ModuleTitle,
+                        src => src.MapFrom(s => s.Title));
+            });
+            // asignamos a la variable mapper el resultado de metodo createMapper() de la configuracion anterior en la variable config
+            var mapper = config.CreateMapper();
+            //Agregamos nuestra configuracion de mapeo como si fuera un servicio.
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
