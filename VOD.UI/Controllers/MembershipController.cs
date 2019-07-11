@@ -82,6 +82,7 @@ namespace VOD.UI.Controllers
             var nextId = next == null ? 0 : next.Id;
             var nextTitle = next == null ? string.Empty : next.Title;
             var nextThumb = next == null ? string.Empty : next.Thumbnail;
+            
             var videoModel = new VideoViewModel
             {
                 Video = videoDTO,
@@ -94,7 +95,9 @@ namespace VOD.UI.Controllers
                     NextVideoId = nextId,
                     PreviousVideoId = previousId,
                     NextVideoTitle = nextTitle,
-                    NextVideoThumbnail = nextThumb
+                    NextVideoThumbnail = nextThumb,
+                    CurrentVideoTitle = video.Title,
+                    CurrentVideoThumbnail = video.Thumbnail
                 }
             };
             return View(videoModel);

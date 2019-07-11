@@ -73,7 +73,8 @@
     /* Relative positioning of the marquee is needed for the cover
  image’s absolute position */
     position: relative;
-}/*Fin imagen de curso*/
+}
+/*Fin imagen de curso*/
 
 
 /*partial video*/
@@ -98,7 +99,9 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-}/*Fin Partial Video*/
+}
+
+/*Fin Partial Video*/
 
 /*Partial Instructor Bio*/
 .instructor-bio {
@@ -106,10 +109,47 @@
     margin-top: 10px;
 }
 
-.instructor-bio .rounded-circle {
-    border: 2px solid #2d91fb;
-    padding: 8px;
-    height: 120px;
-    width: 120px;
-}
+    .instructor-bio .rounded-circle {
+        border: 2px solid #2d91fb;
+        padding: 8px;
+        height: 120px;
+        width: 120px;
+    }
+
 /*Fin Partial Instructor Bio*/
+
+/*partial videoplayer*/
+.video-player {
+    position: relative !important;
+    padding-top: 56.25% !important;
+}
+
+    .video-player iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+.video-course img {
+    width: 50px;
+}
+
+.coming-up .btn-group {
+    width: 100%;
+}
+
+    .coming-up .btn-group .btn {
+        width: 50%;
+        border-radius: 0;
+    }
+
+    .coming-up .btn-group [disabled]:hover {
+        cursor: not-allowed;
+    }
+
+.coming-up img {
+    width: 100%;
+    height: auto;
+}
